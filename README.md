@@ -1,1 +1,1 @@
-Demo for https://shinrenpan.github.io/uisegmentedcontrol/01.html
+https://shinrenpan.github.io/04
