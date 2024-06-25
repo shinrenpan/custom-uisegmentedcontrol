@@ -11,12 +11,12 @@ final class MainTabSegment: UISegmentedControl {
     
     let titles: [String]
     private var firstInit = true
-    private var indecator: UIView
+    private var indicator: UIView
     
     init(titles: [String]) {
         self.titles = titles
-        self.indecator = .init(frame: .zero)
-        self.indecator.backgroundColor = .brown
+        self.indicator = .init(frame: .zero)
+        self.indicator.backgroundColor = .brown
         super.init(frame: .zero)
         setupSelf()
     }
@@ -66,7 +66,7 @@ private extension MainTabSegment {
         setBackgroundImage(UIColor.yellow.toImage(), for: .normal, barMetrics: .default)
         setDividerImage(UIColor.yellow.toImage(), forLeftSegmentState: .normal, rightSegmentState: .normal, barMetrics: .default)
         
-        addSubview(indecator)
+        addSubview(indicator)
     }
     
     // MARK: - Update Something
@@ -78,7 +78,7 @@ private extension MainTabSegment {
         firstInit = false
         
         UIView.animate(withDuration: duration) {
-            self.indecator.frame = .init(x: leading, y: self.bounds.height - 4, width: width, height: 4)
+            self.indicator.frame = .init(x: leading, y: self.bounds.height - 4, width: width, height: 4)
         }
     }
 }
