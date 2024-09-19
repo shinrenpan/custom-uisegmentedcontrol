@@ -9,7 +9,3 @@ import UIKit
 final class MainRouter {
     weak var vc: MainVC?
 }
-
-// MARK: - Public
-
-extension MainRouter {}

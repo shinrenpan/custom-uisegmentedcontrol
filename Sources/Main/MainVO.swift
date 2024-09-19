@@ -6,15 +6,14 @@
 
 import UIKit
 
-final class MainVO {
+@MainActor final class MainVO {
     let mainView = UIView(frame: .zero)
-    let tab = MainTabSegment(titles: ["Tab1", "Tab2", "Tab3"])
-    let pageContainer = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    lazy var tabView = makeTabView()
+    lazy var pages = makePages()
+    lazy var pageContainer = makePageContainer()
     
     init() {
-        mainView.translatesAutoresizingMaskIntoConstraints = false
-        tab.translatesAutoresizingMaskIntoConstraints = false
-        pageContainer.view.translatesAutoresizingMaskIntoConstraints = false
+        setupSelf()
         addViews()
     }
 }
@@ -22,41 +21,85 @@ final class MainVO {
 // MARK: - Public
 
 extension MainVO {
-    func addPageContainer() {
+    func reloadPageContainer() {
         if pageContainer.view.superview === mainView {
             return
         }
         
         mainView.addSubview(pageContainer.view)
+        
         NSLayoutConstraint.activate([
-            pageContainer.view.topAnchor.constraint(equalTo: tab.bottomAnchor),
+            pageContainer.view.topAnchor.constraint(equalTo: tabView.bottomAnchor),
             pageContainer.view.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
             pageContainer.view.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
             pageContainer.view.bottomAnchor.constraint(equalTo: mainView.bottomAnchor),
         ])
     }
     
-    func reloadUIWithTap(model: MainModels.DisplayModel, animated: Bool = true) {
-        pageContainer.setViewControllers([model.currentPage], direction: model.direction, animated: animated)
+    func reloadUIWithTap(response: MainModel.TapResponse, animated: Bool = true) {
+        let vc = pages[response.index]
+        pageContainer.setViewControllers([vc], direction: response.direction, animated: animated)
     }
     
-    func reloadUIWithSwipe(model: MainModels.DisplayModel) {
-        tab.selectedSegmentIndex = model.currentIndex
+    func reloadUIWithSwipe(response: MainModel.SwipeResponse) {
+        tabView.selectedSegmentIndex = response.index
     }
 }
 
 // MARK: - Private
 
 private extension MainVO {
-    // MARK: Add Something
+    // MARK: Setup Something
+    
+    func setupSelf() {
+        mainView.translatesAutoresizingMaskIntoConstraints = false
+        tabView.translatesAutoresizingMaskIntoConstraints = false
+        pageContainer.view.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    // MARK: - Add Something
     
     func addViews() {
-        mainView.addSubview(tab)
+        mainView.addSubview(tabView)
+
         NSLayoutConstraint.activate([
-            tab.topAnchor.constraint(equalTo: mainView.topAnchor),
-            tab.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
-            tab.trailingAnchor.constraint(equalTo: mainView.trailingAnchor),
-            tab.heightAnchor.constraint(equalToConstant: 44),
+            tabView.topAnchor.constraint(equalTo: mainView.topAnchor),
+            tabView.leadingAnchor.constraint(equalTo: mainView.leadingAnchor),
+            tabView.heightAnchor.constraint(equalToConstant: 44),
         ])
+    }
+    
+    // MARK: - Make Something
+    
+    func makePages() -> [UIViewController] {
+        let vc1 = UIViewController()
+        vc1.view.backgroundColor = .red
+        
+        let vc2 = UIViewController()
+        vc2.view.backgroundColor = .green
+        
+        let vc3 = UIViewController()
+        vc3.view.backgroundColor = .yellow
+        
+        return [vc1, vc2, vc3]
+    }
+    
+    func makePageContainer() -> UIPageViewController {
+        .init(transitionStyle: .scroll, navigationOrientation: .horizontal)
+    }
+    
+    func makeTabView() -> CustomTabView {
+        let configuration = CustomTabView.Configuration(
+            selectedFont: .boldSystemFont(ofSize: 20),
+            unselectedFont: .systemFont(ofSize: 18),
+            selectedTextColor: .systemBlue,
+            unselectedTextColor: .darkText,
+            indicatorColor: .systemBlue
+        )
+        
+        let result = CustomTabView(titles: ["Red", "Green", "Yellow"], configuration: configuration)
+        result.selectedSegmentIndex = 0
+        
+        return result
     }
 }

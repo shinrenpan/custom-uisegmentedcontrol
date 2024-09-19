@@ -8,19 +8,19 @@ import Combine
 import UIKit
 
 final class MainVM {
-    @Published private(set) var state = MainModels.State.none
-    private(set) var model = MainModels.DisplayModel()
+    @Published private(set) var state = MainModel.State.none
+    private(set) var currentIndex = 0
 }
 
 // MARK: - Public
 
 extension MainVM {
-    func doAction(_ action: MainModels.Action) {
+    func doAction(_ action: MainModel.Action) {
         switch action {
-        case let .tabToPage(index):
-            actionTapToPage(index: index)
-        case let .swipeToPage(index):
-            actionSwipeToPage(index: index)
+        case let .tap(request):
+            actionTap(request: request)
+        case let .swipe(request):
+            actionSwipe(request: request)
         }
     }
 }
@@ -30,15 +30,35 @@ extension MainVM {
 private extension MainVM {
     // MARK: Handle Action
     
-    func actionTapToPage(index: Int) {
-        if model.reloadIndexSuccess(nextIndex: index) {
-            state = .tabToPage
+    func actionTap(request: MainModel.TapRequest) {
+        if request.index > request.maxCount - 1 {
+            return
         }
+        
+        if currentIndex == request.index {
+            return
+        }
+        
+        let response = MainModel.TapResponse(
+            index: request.index,
+            direction: request.index > currentIndex ? .forward : .reverse
+        )
+        
+        state = .tap(response: response)
+        currentIndex = request.index
     }
     
-    func actionSwipeToPage(index: Int) {
-        if model.reloadIndexSuccess(nextIndex: index) {
-            state = .swipeToPage
+    func actionSwipe(request: MainModel.SwipeRequest) {
+        if request.index > request.maxCount - 1 {
+            return
         }
+        
+        if currentIndex == request.index {
+            return
+        }
+        
+        currentIndex = request.index
+        let response = MainModel.SwipeResponse(index: currentIndex)
+        state = .swipe(response: response)
     }
 }

@@ -6,7 +6,8 @@
 
 import UIKit
 
-@UIApplicationMain class AppDelegate: UIResponder {
+@main
+class AppDelegate: UIResponder {
     var window: UIWindow?
 }
 
