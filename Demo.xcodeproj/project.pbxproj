@@ -10,12 +10,7 @@
 		0E13D3DB2BBD27AC00755AE0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13D3DA2BBD27AC00755AE0 /* AppDelegate.swift */; };
 		0E13D3DD2BBD27AC00755AE0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0E13D3DC2BBD27AC00755AE0 /* Assets.xcassets */; };
 		0E13D3E02BBD27AC00755AE0 /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 0E13D3DF2BBD27AC00755AE0 /* Base */; };
-		0E13D3EC2BBD27FB00755AE0 /* MainVO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13D3E72BBD27FB00755AE0 /* MainVO.swift */; };
-		0E13D3ED2BBD27FB00755AE0 /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13D3E82BBD27FB00755AE0 /* MainRouter.swift */; };
-		0E13D3EE2BBD27FB00755AE0 /* MainVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13D3E92BBD27FB00755AE0 /* MainVM.swift */; };
-		0E13D3EF2BBD27FB00755AE0 /* MainModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13D3EA2BBD27FB00755AE0 /* MainModel.swift */; };
-		0E13D3F02BBD27FB00755AE0 /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E13D3EB2BBD27FB00755AE0 /* MainVC.swift */; };
-		D8565D112C9C6F430037B26F /* CustomTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8565D102C9C6F430037B26F /* CustomTabView.swift */; };
+		D8679C162D7763AB0024A578 /* Home in Frameworks */ = {isa = PBXBuildFile; productRef = D8679C152D7763AB0024A578 /* Home */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,12 +18,7 @@
 		0E13D3DA2BBD27AC00755AE0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0E13D3DC2BBD27AC00755AE0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0E13D3DF2BBD27AC00755AE0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		0E13D3E72BBD27FB00755AE0 /* MainVO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVO.swift; sourceTree = "<group>"; };
-		0E13D3E82BBD27FB00755AE0 /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
-		0E13D3E92BBD27FB00755AE0 /* MainVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVM.swift; sourceTree = "<group>"; };
-		0E13D3EA2BBD27FB00755AE0 /* MainModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModel.swift; sourceTree = "<group>"; };
-		0E13D3EB2BBD27FB00755AE0 /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		D8565D102C9C6F430037B26F /* CustomTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabView.swift; sourceTree = "<group>"; };
+		D8679C132D7763960024A578 /* Home */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = Home; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +26,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D8679C162D7763AB0024A578 /* Home in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +36,9 @@
 		0E13D3CE2BBD27AB00755AE0 = {
 			isa = PBXGroup;
 			children = (
+				D8679C132D7763960024A578 /* Home */,
 				0E13D3D92BBD27AC00755AE0 /* Sources */,
+				D8679C142D7763AB0024A578 /* Frameworks */,
 				0E13D3D82BBD27AC00755AE0 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,7 +54,6 @@
 		0E13D3D92BBD27AC00755AE0 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				0E13D3E62BBD27EC00755AE0 /* Main */,
 				0E13D3DA2BBD27AC00755AE0 /* AppDelegate.swift */,
 				0E13D3DC2BBD27AC00755AE0 /* Assets.xcassets */,
 				0E13D3DE2BBD27AC00755AE0 /* LaunchScreen.storyboard */,
@@ -69,25 +61,11 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
-		0E13D3E62BBD27EC00755AE0 /* Main */ = {
+		D8679C142D7763AB0024A578 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				0E13D3EA2BBD27FB00755AE0 /* MainModel.swift */,
-				0E13D3E82BBD27FB00755AE0 /* MainRouter.swift */,
-				0E13D3EB2BBD27FB00755AE0 /* MainVC.swift */,
-				0E13D3E92BBD27FB00755AE0 /* MainVM.swift */,
-				0E13D3E72BBD27FB00755AE0 /* MainVO.swift */,
-				0E13D3F12BBD280700755AE0 /* Views */,
 			);
-			path = Main;
-			sourceTree = "<group>";
-		};
-		0E13D3F12BBD280700755AE0 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				D8565D102C9C6F430037B26F /* CustomTabView.swift */,
-			);
-			path = Views;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,12 +138,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E13D3EC2BBD27FB00755AE0 /* MainVO.swift in Sources */,
-				0E13D3ED2BBD27FB00755AE0 /* MainRouter.swift in Sources */,
-				0E13D3EE2BBD27FB00755AE0 /* MainVM.swift in Sources */,
-				0E13D3EF2BBD27FB00755AE0 /* MainModel.swift in Sources */,
-				D8565D112C9C6F430037B26F /* CustomTabView.swift in Sources */,
-				0E13D3F02BBD27FB00755AE0 /* MainVC.swift in Sources */,
 				0E13D3DB2BBD27AC00755AE0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -314,6 +286,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -338,6 +311,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -373,6 +347,13 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D8679C152D7763AB0024A578 /* Home */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Home;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 0E13D3CF2BBD27AB00755AE0 /* Project object */;
 }

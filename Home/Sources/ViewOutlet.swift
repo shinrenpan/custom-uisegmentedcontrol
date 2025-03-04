@@ -1,12 +1,13 @@
 //
-//  MainVO.swift
+//  ViewOutlet.swift
+//  Home
 //
-//  Created by Shinren Pan on 2024/4/3.
+//  Created by Joe Pan on 2025/3/5.
 //
 
 import UIKit
 
-@MainActor final class MainVO {
+@MainActor final class ViewOutlet {
     let mainView = UIView(frame: .zero)
     lazy var tabView = makeTabView()
     lazy var pages = makePages()
@@ -18,9 +19,9 @@ import UIKit
     }
 }
 
-// MARK: - Public
+// MARK: - Internal
 
-extension MainVO {
+internal extension ViewOutlet {
     func reloadPageContainer() {
         if pageContainer.view.superview === mainView {
             return
@@ -36,28 +37,24 @@ extension MainVO {
         ])
     }
     
-    func reloadUIWithTap(response: MainModel.TapResponse, animated: Bool = true) {
+    func reloadUIWithTap(response: TapResponse, animated: Bool = true) {
         let vc = pages[response.index]
         pageContainer.setViewControllers([vc], direction: response.direction, animated: animated)
     }
     
-    func reloadUIWithSwipe(response: MainModel.SwipeResponse) {
+    func reloadUIWithSwipe(response: SwipeResponse) {
         tabView.selectedSegmentIndex = response.index
     }
 }
 
 // MARK: - Private
 
-private extension MainVO {
-    // MARK: Setup Something
-    
+private extension ViewOutlet {
     func setupSelf() {
         mainView.translatesAutoresizingMaskIntoConstraints = false
         tabView.translatesAutoresizingMaskIntoConstraints = false
         pageContainer.view.translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    // MARK: - Add Something
     
     func addViews() {
         mainView.addSubview(tabView)
@@ -68,8 +65,6 @@ private extension MainVO {
             tabView.heightAnchor.constraint(equalToConstant: 44),
         ])
     }
-    
-    // MARK: - Make Something
     
     func makePages() -> [UIViewController] {
         let vc1 = UIViewController()
@@ -88,8 +83,8 @@ private extension MainVO {
         .init(transitionStyle: .scroll, navigationOrientation: .horizontal)
     }
     
-    func makeTabView() -> CustomTabView {
-        let configuration = CustomTabView.Configuration(
+    func makeTabView() -> TabView {
+        let configuration = TabView.Configuration(
             selectedFont: .boldSystemFont(ofSize: 20),
             unselectedFont: .systemFont(ofSize: 18),
             selectedTextColor: .systemBlue,
@@ -97,7 +92,7 @@ private extension MainVO {
             indicatorColor: .systemBlue
         )
         
-        let result = CustomTabView(titles: ["Red", "Green", "Yellow"], configuration: configuration)
+        let result = TabView(titles: ["Red", "Green", "Yellow"], configuration: configuration)
         result.selectedSegmentIndex = 0
         
         return result

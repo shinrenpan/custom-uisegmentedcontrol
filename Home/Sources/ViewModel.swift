@@ -1,21 +1,22 @@
 //
-//  MainVM.swift
+//  ViewModel.swift
+//  Home
 //
-//  Created by Shinren Pan on 2024/4/3.
+//  Created by Joe Pan on 2025/3/5.
 //
 
 import Combine
 import UIKit
 
-final class MainVM {
-    @Published private(set) var state = MainModel.State.none
+final class ViewModel {
+    @Published private(set) var state = State.none
     private(set) var currentIndex = 0
 }
 
-// MARK: - Public
+// MARK: - Internal
 
-extension MainVM {
-    func doAction(_ action: MainModel.Action) {
+internal extension ViewModel {
+    func doAction(_ action: Action) {
         switch action {
         case let .tap(request):
             actionTap(request: request)
@@ -27,10 +28,10 @@ extension MainVM {
 
 // MARK: - Private
 
-private extension MainVM {
+private extension ViewModel {
     // MARK: Handle Action
     
-    func actionTap(request: MainModel.TapRequest) {
+    func actionTap(request: TapRequest) {
         if request.index > request.maxCount - 1 {
             return
         }
@@ -39,7 +40,7 @@ private extension MainVM {
             return
         }
         
-        let response = MainModel.TapResponse(
+        let response = TapResponse(
             index: request.index,
             direction: request.index > currentIndex ? .forward : .reverse
         )
@@ -48,7 +49,7 @@ private extension MainVM {
         currentIndex = request.index
     }
     
-    func actionSwipe(request: MainModel.SwipeRequest) {
+    func actionSwipe(request: SwipeRequest) {
         if request.index > request.maxCount - 1 {
             return
         }
@@ -58,7 +59,7 @@ private extension MainVM {
         }
         
         currentIndex = request.index
-        let response = MainModel.SwipeResponse(index: currentIndex)
+        let response = SwipeResponse(index: currentIndex)
         state = .swipe(response: response)
     }
 }

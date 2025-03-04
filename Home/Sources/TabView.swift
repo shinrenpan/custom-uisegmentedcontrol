@@ -1,13 +1,21 @@
 //
-//  CustomTabView.swift
+//  TabView.swift
+//  Home
 //
-//  Created by Joe Pan on 2024/9/19.
-//
+//  Created by Joe Pan on 2025/3/5.
 //
 
 import UIKit
 
-final class CustomTabView: UISegmentedControl {
+final class TabView: UISegmentedControl {
+    struct Configuration {
+        let selectedFont: UIFont
+        let unselectedFont: UIFont
+        let selectedTextColor: UIColor
+        let unselectedTextColor: UIColor
+        let indicatorColor: UIColor?
+    }
+    
     let configuration: Configuration
     private lazy var indicator = makeIndicator()
     private var firstInit = true
@@ -38,21 +46,9 @@ final class CustomTabView: UISegmentedControl {
     }
 }
 
-// MARK: - Configuration
+// MARK: - Internal
 
-extension CustomTabView {
-    struct Configuration {
-        let selectedFont: UIFont
-        let unselectedFont: UIFont
-        let selectedTextColor: UIColor
-        let unselectedTextColor: UIColor
-        let indicatorColor: UIColor?
-    }
-}
-
-// MARK: - Public
-
-extension CustomTabView {
+internal extension TabView {
     func reloadTitles(_ titles: [String]) {
         if titles.isEmpty {
             return
@@ -76,10 +72,7 @@ extension CustomTabView {
 
 // MARK: - Private
 
-private extension CustomTabView {
-    
-    // MARK: Setup Something
-    
+private extension TabView {
     func setupSelf() {
         setTitleTextAttributes([
             .font: configuration.unselectedFont,
@@ -103,8 +96,6 @@ private extension CustomTabView {
         }
     }
 
-    // MARK: - Reload Something
-    
     func updateUI() {
         if subviews.isEmpty {
             return
@@ -127,8 +118,6 @@ private extension CustomTabView {
             indicator.center = .init(x: centerX, y: self.bounds.height - height)
         }
     }
-    
-    // MARK: - Make Something
     
     func makeIndicator() -> UIView? {
         guard let indicatorColor = configuration.indicatorColor else {

@@ -1,19 +1,20 @@
 //
-//  MainVC.swift
+//  ViewController.swift
+//  Home
 //
-//  Created by Shinren Pan on 2024/4/3.
+//  Created by Joe Pan on 2025/3/5.
 //
 
 import Combine
 import UIKit
 
-final class MainVC: UIViewController {
-    private let vo = MainVO()
-    private let vm = MainVM()
-    private let router = MainRouter()
+public final class ViewController: UIViewController {
+    private let vo = ViewOutlet()
+    private let vm = ViewModel()
+    private let router = Router()
     private var binding: Set<AnyCancellable> = .init()
 
-    override func viewDidLoad() {
+    public override func viewDidLoad() {
         super.viewDidLoad()
         setupSelf()
         setupBinding()
@@ -23,9 +24,7 @@ final class MainVC: UIViewController {
 
 // MARK: - Private
 
-private extension MainVC {
-    // MARK: Setup Something
-
+private extension ViewController {
     func setupSelf() {
         view.backgroundColor = vo.mainView.backgroundColor
         router.vc = self
@@ -68,24 +67,20 @@ private extension MainVC {
             guard let self else { return }
             let index = vo.tabView.selectedSegmentIndex
             let maxCount = vo.pages.count
-            let request = MainModel.TapRequest(index: index, maxCount: maxCount)
+            let request = TapRequest(index: index, maxCount: maxCount)
             vm.doAction(.tap(request: request))
         }, for: .valueChanged)
     }
 
-    // MARK: - Handle State
-
     func stateNone() {}
     
-    func stateTap(response: MainModel.TapResponse) {
+    func stateTap(response: TapResponse) {
         vo.reloadUIWithTap(response: response, animated: true)
     }
     
-    func stateSwipe(response: MainModel.SwipeResponse) {
+    func stateSwipe(response: SwipeResponse) {
         vo.reloadUIWithSwipe(response: response)
     }
-    
-    // MARK: - Make Something
     
     func makePrevViewController() -> UIViewController? {
         let prevIndex = vm.currentIndex - 1
@@ -111,8 +106,6 @@ private extension MainVC {
         return vo.pages[nextIndex]
     }
     
-    // MARK: - Get Something
-    
     func getCurrentPageIndex(pageViewController: UIPageViewController) -> Int? {
         guard let currentVC = pageViewController.viewControllers?.first else {
             return nil
@@ -124,23 +117,23 @@ private extension MainVC {
 
 // MARK: - UIPageViewControllerDataSource
 
-extension MainVC: UIPageViewControllerDataSource {
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+extension ViewController: UIPageViewControllerDataSource {
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         makePrevViewController()
     }
     
-    func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+    public func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
         makeNextViewController()
     }
 }
 
 // MARK: - UIPageViewControllerDelegate
 
-extension MainVC: UIPageViewControllerDelegate {
-    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+extension ViewController: UIPageViewControllerDelegate {
+    public func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         if completed, let currentIndex = getCurrentPageIndex(pageViewController: pageViewController) {
             let maxCount = vo.pages.count
-            let request = MainModel.SwipeRequest(index: currentIndex, maxCount: maxCount)
+            let request = SwipeRequest(index: currentIndex, maxCount: maxCount)
             vm.doAction(.swipe(request: request))
         }
     }

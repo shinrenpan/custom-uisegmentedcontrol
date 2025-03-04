@@ -5,6 +5,7 @@
 //
 
 import UIKit
+import Home
 
 @main
 class AppDelegate: UIResponder {
@@ -18,7 +19,7 @@ extension AppDelegate: UIApplicationDelegate {
         let bounds = UIScreen.main.bounds
         let window = UIWindow(frame: bounds)
         window.backgroundColor = .white
-        window.rootViewController = MainVC()
+        window.rootViewController = Home.ViewController()
         self.window = window
         window.makeKeyAndVisible()
         return true
