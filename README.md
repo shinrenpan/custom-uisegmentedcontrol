@@ -1,3 +1,3 @@
-https://shinrenpan.github.io/04
+shinrenpan/shinrenpan/discussions/13
 
 ![](images/screenshot.gif)
